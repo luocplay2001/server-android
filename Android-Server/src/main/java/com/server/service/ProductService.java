@@ -21,7 +21,7 @@ public class ProductService {
         Product entity = new Product();
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
-        entity.setDescription(dto.getDesctiption());
+        entity.setDescription(dto.getDescription());
         entity.setImageUrl(dto.getImageUrl());
         entity.setCategory(categoryDAO.findById(dto.getCategoryId()).get());
         productDAO.save(entity);
@@ -32,7 +32,7 @@ public class ProductService {
         Product entity = productDAO.findById(dto.getId()).get();
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
-        entity.setDescription(dto.getDesctiption());
+        entity.setDescription(dto.getDescription());
         entity.setImageUrl(dto.getImageUrl());
         entity.setCategory(categoryDAO.findById(dto.getCategoryId()).get());
         productDAO.save(entity);

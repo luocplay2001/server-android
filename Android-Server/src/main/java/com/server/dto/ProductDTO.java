@@ -10,7 +10,7 @@ public class ProductDTO {
     private Integer id;
     private String name;
     private double price;
-    private String desctiption;
+    private String description;
     private String imageUrl;
     private Integer categoryId;
 }
