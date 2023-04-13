@@ -14,16 +14,17 @@ public class ProductService {
     @Autowired private CategoryDAO categoryDAO;
 
     public ResponseEntity<?> findAll(Integer categoryId) {
-        return ResponseEntity.ok(productDAO.findAllByCategoryId(categoryId));
+        return ResponseEntity.ok(productDAO.findByCategoryId(categoryId));
     }
 
     public ResponseEntity<?> addProduct(ProductDTO dto) {
         Product entity = new Product();
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
-        entity.setDesctiption(dto.getDesctiption());
+        entity.setDescription(dto.getDesctiption());
         entity.setImageUrl(dto.getImageUrl());
         entity.setCategory(categoryDAO.findById(dto.getCategoryId()).get());
+        productDAO.save(entity);
         return ResponseEntity.ok(entity);
     }
 
@@ -31,9 +32,10 @@ public class ProductService {
         Product entity = productDAO.findById(dto.getId()).get();
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
-        entity.setDesctiption(dto.getDesctiption());
+        entity.setDescription(dto.getDesctiption());
         entity.setImageUrl(dto.getImageUrl());
         entity.setCategory(categoryDAO.findById(dto.getCategoryId()).get());
+        productDAO.save(entity);
         return ResponseEntity.ok(entity);
     }
 
