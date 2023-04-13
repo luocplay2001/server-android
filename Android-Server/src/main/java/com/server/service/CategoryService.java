@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     public ResponseEntity<?> updateCategory(CategoryDTO dto) {
-        Category entity = categoryDAO.getById(dto.getId());
+        Category entity = categoryDAO.findById(dto.getId()).get();
         entity.setName(dto.getName());
         categoryDAO.save(entity);
         return ResponseEntity.ok(entity);
