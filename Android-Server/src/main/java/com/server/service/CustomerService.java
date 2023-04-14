@@ -28,7 +28,7 @@ public class CustomerService {
         if(dto.getEmail().equals("") || dto.getPassword().equals(""))
             return ResponseEntity.ok("Tài khoản hoặc mật khẩu không được để trống");
         Customer customer = customerDAO.findByEmail(dto.getEmail());
-        if(customer == null) return ResponseEntity.ok("Tài khoản đã tồn tại");
+        if(customer != null) return ResponseEntity.ok("Tài khoản đã tồn tại");
         Customer entity = new Customer();
         entity.setAddress(dto.getAddress());
         entity.setDob(dto.getDob());
