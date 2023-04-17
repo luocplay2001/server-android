@@ -1,5 +1,6 @@
 package com.server.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import jakarta.persistence.*;
@@ -23,7 +24,8 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
-    @OneToMany(mappedBy = "cart",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "cart",fetch = FetchType.LAZY)
+    @JsonIgnore
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<CartItem> cartItems;

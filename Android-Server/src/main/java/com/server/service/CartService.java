@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -80,5 +81,35 @@ public class CartService {
 //            });
 //        });
         return ResponseEntity.ok("Đã thêm vào giỏ hàng");
+    }
+
+    public ResponseEntity<?> viewCart(Integer customerId) {
+        List<Cart> carts = cartDAO.findByCustomerId(customerId);
+        if(carts != null && !carts.isEmpty()) {
+            for(Cart cart: carts) {
+                if(cart.getStatus().equals("CREATE")) {
+                    cart.setTotalAmount(cart.getCartItems().stream().mapToDouble(CartItem::getAmount).sum());
+                    cartDAO.save(cart);
+                    return ResponseEntity.ok(cart);
+                }
+            }
+        }
+        return ResponseEntity.ok("Giỏ hàng trống");
+    }
+
+    public ResponseEntity<?> checkout(Integer customerId) {
+        List<Cart> carts = cartDAO.findByCustomerId(customerId);
+        if(carts != null && !carts.isEmpty()) {
+            for(Cart cart: carts) {
+                if(cart.getStatus().equals("CREATE")) {
+                    cart.setStatus("ORDERED");
+                    cart.setCreatedDate(new Date());
+                    cart.setTotalAmount(cart.getCartItems().stream().mapToDouble(CartItem::getAmount).sum());
+                    cartDAO.save(cart);
+                    return ResponseEntity.ok("Đặt hàng thành công");
+                }
+            }
+        }
+        return ResponseEntity.ok("Giỏ hàng trống");
     }
 }
