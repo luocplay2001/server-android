@@ -30,4 +30,9 @@ public class CartController {
     public ResponseEntity<?> history(@PathVariable Integer customerId) {
         return cartService.history(customerId);
     }
+
+    @DeleteMapping("/delete/{cartItemId}")
+    public void removeCartItem(@PathVariable Integer cartItemId) {
+        cartService.removeCartItem(cartItemId);
+    }
 }

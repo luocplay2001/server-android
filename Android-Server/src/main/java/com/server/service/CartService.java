@@ -84,6 +84,18 @@ public class CartService {
         return ResponseEntity.ok("Đã thêm vào giỏ hàng");
     }
 
+    public void removeCartItem(Integer cartItemId) {
+        CartItem cartItem = cartItemDAO.findById(cartItemId).get();
+        Product product = cartItem.getProduct();
+        if(cartItem.getQuantity() > 1) {
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
+            cartItem.setAmount(cartItem.getQuantity() * product.getPrice());
+            cartItemDAO.save(cartItem);
+        } else {
+            cartItemDAO.deleteById(cartItemId);
+        }
+    }
+
     public ResponseEntity<?> viewCart(Integer customerId) {
         List<Cart> carts = cartDAO.findByCustomerId(customerId);
         if(carts != null && !carts.isEmpty()) {
