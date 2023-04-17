@@ -8,6 +8,7 @@ import com.server.repository.CartDAO;
 import com.server.repository.CartItemDAO;
 import com.server.repository.CustomerDAO;
 import com.server.repository.ProductDAO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class CartService {
     @Autowired private CartDAO cartDAO;
     @Autowired private CustomerDAO customerDAO;
@@ -72,6 +74,11 @@ public class CartService {
             System.out.println(cartItem);
             cartItemDAO.save(cartItem);
         }
+//        carts.forEach(cart -> {
+//            cart.getCartItems().forEach(cartItem -> {
+//                log.info("CART: {}", cartItem);
+//            });
+//        });
         return ResponseEntity.ok("Đã thêm vào giỏ hàng");
     }
 }

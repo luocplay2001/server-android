@@ -2,6 +2,7 @@ package com.server.service;
 
 import com.server.dto.AuthRequest;
 import com.server.dto.CustomerDTO;
+import com.server.dto.SignupRequest;
 import com.server.entity.Customer;
 import com.server.repository.CustomerDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,14 @@ public class CustomerService {
         entity.setPhone(dto.getPhone());
         customerDAO.save(entity);
         return ResponseEntity.ok(entity);
+    }
+
+    public ResponseEntity<?> signup(SignupRequest request) {
+        Customer customer = customerDAO.findByEmail(request.getEmail());
+        if(customer != null)
+            return ResponseEntity.ok("Tài khoản đã tồn tại");
+        if(!request.getPassword().equals(request.getConfirmPassword()))
+            return ResponseEntity.ok("Mật khẩu không khớp");
+        return ResponseEntity.ok("Đăng ký thành công");
     }
 }
