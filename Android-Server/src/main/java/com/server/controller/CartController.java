@@ -25,4 +25,9 @@ public class CartController {
     public ResponseEntity<?> checkout(@PathVariable Integer customerId) {
         return cartService.checkout(customerId);
     }
+
+    @GetMapping("/history/{customerId}")
+    public ResponseEntity<?> history(@PathVariable Integer customerId) {
+        return cartService.history(customerId);
+    }
 }

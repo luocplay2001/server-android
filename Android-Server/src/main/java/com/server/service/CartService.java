@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -111,5 +112,14 @@ public class CartService {
             }
         }
         return ResponseEntity.ok("Giỏ hàng trống");
+    }
+
+    public ResponseEntity<?> history(Integer customerId) {
+        List<Cart> carts = cartDAO.findByCustomerId(customerId).stream().filter(cart ->
+                cart.getStatus().equals("ORDERED")).collect(Collectors.toList());
+        if(carts != null && !carts.isEmpty()) {
+            return ResponseEntity.ok(carts);
+        }
+        return ResponseEntity.ok("Lịch sử đơn hàng trống");
     }
 }
