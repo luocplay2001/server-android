@@ -1,3 +1,4 @@
+use btl_android;
 INSERT INTO customer (name, email, password, gender, phone, dob, created_date, address) values ('Nguyen Kien', 'nguyenkien@gmail.com', '123123', 'Nam', '0123456789','2023-04-15 12:00:00', '2023-04-15 12:00:00', 'Ha Noi');
 INSERT INTO category (name) values ('Trà Sữa');
 INSERT INTO products (name, price, description, category_id) values ('Trà sữa hạt dẻ', 25000, 'thơm ngon', 1);
