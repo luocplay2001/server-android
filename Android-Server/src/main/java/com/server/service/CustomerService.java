@@ -21,7 +21,7 @@ public class CustomerService {
 
     public ResponseEntity<?> login(AuthRequest request) {
         Customer customer = customerDAO.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        if(customer != null) return ResponseEntity.ok("Đăng nhập thành công");
+        if(customer != null) return ResponseEntity.ok(customer);
         return ResponseEntity.ok("Đăng nhập thất bại");
     }
 
