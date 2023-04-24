@@ -50,7 +50,6 @@ public class CustomerService {
         entity.setAddress(dto.getAddress());
         entity.setDob(dto.getDob());
         entity.setName(dto.getName());
-        entity.setPassword(dto.getPassword());
         entity.setGender(dto.getGender());
         entity.setPhone(dto.getPhone());
         customerDAO.save(entity);
